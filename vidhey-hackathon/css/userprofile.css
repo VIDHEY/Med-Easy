@@ -1,12 +1,32 @@
 *{
-	font-family: 'Source Sans Pro', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	
 }
+.container-fluid{
+		background-color: #c9edd8;
+	}
+.container{
+	z-index:1;
+	background-color: white;
+	height: 100vh;
+	border: 1px solid black;
+	box-shadow: 5px 3px 3px grey;
+}
+.navcon{
+	background-color: #ffffff;
+}
+.hfieldnm{
+	font-size: 18px;
+}
+
 .fieldname{
-	font-family: 'Tajawal', sans-serif;
 	font-size: 18px;
 }
 .data
 {
 	font-size: 17px;
+	margin-left: 10px;	
+}
+.links{
+	font-size: 20px;
 }

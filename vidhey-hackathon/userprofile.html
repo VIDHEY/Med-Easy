@@ -8,19 +8,42 @@
 	<link rel="stylesheet" type="text/css" href="css/userprofile.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Tajawal" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	
 </head>
 <body>
+<div class="container-fluid">
 <div class="container">
+
+	<div class="row">
+		<nav class="navbar navbar-default">
+		  <div class="container-fluid navcon">
+		    <div class="navbar-header">
+		      <a class="navbar-brand" href="#">MedEasy</a>
+		    </div>
+		   
+		    <ul class="nav navbar-nav navbar-right">
+
+		      <li><a href="#"><span class=""></span> Predict Disease</a></li>
+		      <li><a href="#"><span class=""></span> Search Hospitals</a></li>
+		      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+		      <li><a onclick="document.getElementById('id01').style.display='block'">Login</a></li>
+		      
+		    </ul>
+		  </div>
+		</nav>
+	</div>
+
+
+
 	<div class="row" style="display: flex;flex-wrap: wrap;padding-top: 30px;">
 	<div class="col-md-4">
 		<div class="userphoto"><img src="vidhey.png" height="130px" width="160px" class="img-thumbnail"></div>
 	</div>
-	<div class="col-md-2"></div>
+	
 	<div class="col-md-6">
 		<div class="userpersonalinfo" style="margin-left: 10%;">
-			<div class="fieldname">NAME:-&nbsp;&nbsp;<span class="data">xyz</span></div>
+			<div class="fieldname"><div classname="field">NAME:-&nbsp;&nbsp;<span class="data">xyz</span></div>
 			<div class="fieldname">DOB:-&nbsp;&nbsp;<span class="data">aa/bb/cccc</span></div>
 			<div class="fieldname">WEIGHT:-&nbsp;&nbsp;<span class="data">50</span></div>
 			<div class="fieldname">AGE:-&nbsp;&nbsp;<span class="data">34</span></div>
@@ -31,14 +54,14 @@
 
 		</div>
 	</div>
+	<div class="col-md-2"></div>
 </div>
-
 	<div class="row" style="margin-top: 30px;">
 		<div class="linkbuttons col-md-12">
 			<ul class="nav nav-tabs">
-  				<li class="active"><a href="#">History</a></li>
-  				<li><a href="#">Quotes</a></li>
-  				<li><a href="#">Allergies</a></li>
+  				<li class="active links"><a href="#">History</a></li>
+  				<li><a href="#" class="links">Quotes</a></li>
+  				<li><a href="#" class="links">Allergies</a></li>
   			</ul>
 		</div>
 	</div>
@@ -73,6 +96,7 @@
  	</blockquote>
 </div>
 
+</div>
 </div>
 </div>
 </body>
