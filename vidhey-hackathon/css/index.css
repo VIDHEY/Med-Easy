@@ -7,7 +7,7 @@ input[type=text], input[type=password] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
-    display: inline-block;
+   /* display: inline-block;*/
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
@@ -32,7 +32,7 @@ button:hover {
 .cancelbtn {
     width: auto;
     padding: 10px 18px;
-    background-color: #f44336;
+    background-color: black;
 }
 
 /* Center the avatar image inside this container */
@@ -67,4 +67,10 @@ span.psw {
     .cancelbtn {
         width: 100%;
     }
+}
+
+.searchform{
+    position: absolute;
+    top: 50%;
+    left: 40%;
 }
