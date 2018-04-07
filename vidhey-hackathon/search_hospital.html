@@ -1,0 +1,79 @@
+ <!DOCTYPE HTML>
+ <html>
+ <head>
+  <meta charset="utf-8">
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXRzr9021jObu25IkklWcAtE1kdwb99K8&libraries=places"></script>
+  
+<style>
+html, body {
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+#hospitals{
+  height: 100%;
+}
+#map-canvas{
+  height: 0%;
+}
+</style>
+ </head>
+ <body>
+ 	<div id ="map-canvas"></div>
+  <ol id = "hospitals"></ol>
+ </body>
+ <script src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript">
+      var map,id;
+var infowindow;
+var lat,lng;
+function getLocation() {
+    if(navigator.geolocation){
+navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }
+function geoSuccess(position) {
+    lat = position.coords.latitude;
+    lng = position.coords.longitude;
+}
+function geoError() {
+    alert("Geocoder failed.");
+}
+function setLocation(){
+  var pyrmont = new google.maps.LatLng(lat,lng); // sample location to start with: Mumbai, India
+  id = document.getElementById('hospitals');
+  map = new google.maps.Map(document.getElementById('map-canvas'), {
+    center: pyrmont,
+    zoom: 15
+  });
+
+  var request = {
+    location: pyrmont,
+    radius: 5000,
+    types: ['hospital', 'health'] // this is where you set the map to get the hospitals and health related places
+  };
+  var service = new google.maps.places.PlacesService(map);
+  service.nearbySearch(request, callback);
+}
+function initialize() {
+  var loc = {};
+  getLocation();
+  setTimeout(setLocation, 5000);
+}
+
+function callback(results, status) {
+  if (status == google.maps.places.PlacesServiceStatus.OK) {
+    for (var i = 0; i < results.length; i++) {
+      str="<li> Name: "+results[i].name+"<p> Address: "+results[i].vicinity+"</p>"+"<p> Rating: "+results[i].rating+"</p>"+"</li>";
+      id.innerHTML+=str;
+    }
+  }
+}
+
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+ </html>
