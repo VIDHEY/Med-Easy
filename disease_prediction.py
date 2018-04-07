@@ -23,5 +23,5 @@ def predict(lis):
 	y1=mnb.predict(x1)
 	pred=''.join(y1)
 	return pred
-lis=['vomiting']
+lis=['vomiting','worry','weepiness']
 print(predict(lis))
