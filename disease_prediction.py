@@ -11,7 +11,7 @@ def predict(lis):
 	y = data.disease
 	mnb = MultinomialNB()
 	mnb = mnb.fit(x, y)
-	dict_={}
+	dict_ = {}
 	i=0
 	for dat in data.iloc[[0]]:
 		dict_[dat]=i
