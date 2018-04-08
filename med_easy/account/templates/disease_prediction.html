@@ -1,0 +1,454 @@
+<!Doctype HTML>
+<HTML>
+<head>
+	<title>Disease Prediction</title>
+	<meta charset="UTF-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  	<style type="text/css">.listofsymp{height:300px;overflow-y:auto}#selmenu{width:100%;height:40px;border-radius:5px;padding-left:10px;font-size:17px}.searchbox{text-align:center}.listofsymp{width:100%;display:block}.list{margin:auto}ul{display:block}.bottombox{margin:5% auto}.bottombox p{font-size:22px}#countsymptoms{text-align:center}.bottombox ul{list-style-type:none}.bottombox ul li{font-size:19px;width:50%;height:30px;padding:2px 10px;font-weight:bold;background-color:#6ba889;color:white;border:1px solid black;border-radius:4px;margin:5px 0}#predictres{width:10%;height:40px;font-size:20px;background-color:white;color:black;font-weight:bold;margin:auto}.dropdown{position:relative;display:inline-block}.dropdown-content{display:none;position:absolute;background-color:#f1f1f1;min-width:160px;box-shadow:0 8px 16px 0 rgba(0,0,0,0.2);z-index:1}.select{height:5%;width:5%}#myInput{background-position:10px 12px;background-repeat:no-repeat;width:100%;font-size:16px;padding:12px 20px 12px 40px;border:1px solid #ddd;margin-bottom:12px}#myUL{list-style-type:none;padding:0;margin:0}#myUL li a{border:1px solid #ddd;margin-top:-1px;background-color:#f6f6f6;padding:12px;text-decoration:none;font-size:18px;color:black;display:block}#myUL li a:hover:not(.header){background-color:#eee}</style>
+	<script type="text/javascript">
+		var count =0;
+		var str=[];
+		function addSymptom(sel){
+			var di=document.getElementById('Selected');
+			var di2 = document.getElementById('symptoms');
+
+
+			var flag=0;
+			var d1 = di.getElementsByTagName('li');
+			for (var i =0;i<d1.length;i++){
+				if(d1[i].textContent==sel){
+					flag=1;
+					break;
+				}
+			}
+			if(flag==0){
+				count++;
+				var txt="Selected"+count;
+				var di1 = "<li name=\""+txt+"\">"+sel+"</li>";
+				di2.innerHTML+=di1;
+				str.push(sel);
+				console.log(str);
+				di3=document.getElementById('countsymptoms');
+				di3.value=count;
+			}
+		}
+	function myFunction() {
+	    var input, filter, ul, li, a, i;
+	    input = document.getElementById("selmenu");
+	    filter = input.value.toUpperCase();
+	    ul = document.getElementById("myUL");
+	    li = ul.getElementsByTagName("li");
+	    for (i = 0; i < li.length; i++) {
+	        a = li[i].getElementsByTagName("a")[0];
+	        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+	            li[i].style.display = "";
+	        } else {
+	            li[i].style.display = "none";
+
+	        }
+	    }
+	}
+
+	function ajreq(){
+		$.ajax({
+			type:"GET",
+	        url: '/ajax/prediction_result/',
+	        data: {
+	          'sym_list': str,
+	        },
+	        dataType: 'json',
+	        success: function (data) {
+	        	console.log(data);
+	          if (data.disease_prediction) {
+	            // $("#predicted_result").innerHTML=data.disease_prediction;
+	            // alert("you are in danger!!");
+	            var r=document.getElementById('predicted_result');
+	            r.innerHTML=data.disease_prediction;
+	          }
+	        }
+	      });
+	}
+
+</script>
+<link rel="stylesheet" type="text/css" href="css/disease_prediction.css">
+</head>
+<body>
+	<div class="container-fluid">
+
+	<div class="row">
+		<nav class="navbar navbar-default">
+		  <div class="container-fluid">
+		    <div class="navbar-header">
+		      <a class="navbar-brand" href="#">MedEasy</a>
+		    </div>
+		   
+		    <ul class="nav navbar-nav navbar-right">
+
+		      <li><a href="#"><span class=""></span> Predict Disease</a></li>
+		      <li><a href="#"><span class=""></span> Search Hospitals</a></li>
+		      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+		      <li><a onclick="document.getElementById('id01').style.display='block'">Login</a></li>
+		      
+		    </ul>
+		  </div>
+		</nav>
+	</div>
+
+
+
+
+	<div class="main-contain">
+		<div class="titletext">
+			<h1 style="color: #0f5b34;">Predict Disease</h1>
+			<hr>
+		</div>
+		<div class="searchbox">	
+			<input type="text" id="selmenu" onkeyup="myFunction();" placeholder="Search for symptoms.." title="Type in a symptom">
+		</div>
+
+	<div class="listofsymp">
+		<div class="list">
+		  <ul id ="myUL">
+			<li><a href="#" onclick="addSymptom('abdomen acute')">abdomen acute</a></li>
+			<li><a href="#" onclick="addSymptom('abdominal tenderness')">abdominal tenderness</a></li>
+			<li><a href="#" onclick="addSymptom('abnormally hard consistency')">abnormally hard consistency</a></li>
+			<li><a href="#" onclick="addSymptom('abortion')">abortion</a></li>
+			<li><a href="#" onclick="addSymptom('abscess bacterial')">abscess bacterial</a></li>
+			<li><a href="#" onclick="addSymptom('absences finding')">absences finding</a></li>
+			<li><a href="#" onclick="addSymptom('achalasia')">achalasia</a></li>
+			<li><a href="#" onclick="addSymptom('agitation')">agitation</a></li>
+			<li><a href="#" onclick="addSymptom('air fluid level')">air fluid level</a></li>
+			<li><a href="#" onclick="addSymptom('alcohol binge episode')">alcohol binge episode</a></li>
+			<li><a href="#" onclick="addSymptom('ambidexterity')">ambidexterity</a></li>
+			<li><a href="#" onclick="addSymptom('angina pectoris')">angina pectoris</a></li>
+			<li><a href="#" onclick="addSymptom('anorexia')">anorexia</a></li>
+			<li><a href="#" onclick="addSymptom('anosmia')">anosmia</a></li>
+			<li><a href="#" onclick="addSymptom('aphagia')">aphagia</a></li>
+			<li><a href="#" onclick="addSymptom('apyrexial')">apyrexial</a></li>
+			<li><a href="#" onclick="addSymptom('arthralgia')">arthralgia</a></li>
+			<li><a href="#" onclick="addSymptom('ascites')">ascites</a></li>
+			<li><a href="#" onclick="addSymptom('asterixis')">asterixis</a></li>
+			<li><a href="#" onclick="addSymptom('asthenia')">asthenia</a></li>
+			<li><a href="#" onclick="addSymptom('ataxia')">ataxia</a></li>
+			<li><a href="#" onclick="addSymptom('atypia')">atypia</a></li>
+			<li><a href="#" onclick="addSymptom('aura')">aura</a></li>
+			<li><a href="#" onclick="addSymptom('bedridden')">bedridden</a></li>
+			<li><a href="#" onclick="addSymptom('behavior hyperactive')">behavior hyperactive</a></li>
+			<li><a href="#" onclick="addSymptom('blackout')">blackout</a></li>
+			<li><a href="#" onclick="addSymptom('bradycardia')">bradycardia</a></li>
+			<li><a href="#" onclick="addSymptom('bradykinesia')">bradykinesia</a></li>
+			<li><a href="#" onclick="addSymptom('breakthrough pain')">breakthrough pain</a></li>
+			<li><a href="#" onclick="addSymptom('breath sounds decreased')">breath sounds decreased</a></li>
+			<li><a href="#" onclick="addSymptom('breech presentation')">breech presentation</a></li>
+			<li><a href="#" onclick="addSymptom('bruit')">bruit</a></li>
+			<li><a href="#" onclick="addSymptom('burning sensation')">burning sensation</a></li>
+			<li><a href="#" onclick="addSymptom('cardiomegaly')">cardiomegaly</a></li>
+			<li><a href="#" onclick="addSymptom('cardiovascular event')">cardiovascular event</a></li>
+			<li><a href="#" onclick="addSymptom('cardiovascular finding')">cardiovascular finding</a></li>
+			<li><a href="#" onclick="addSymptom('catatonia')">catatonia</a></li>
+			<li><a href="#" onclick="addSymptom('catching breath')">catching breath</a></li>
+			<li><a href="#" onclick="addSymptom('charleyhorse')">charleyhorse</a></li>
+			<li><a href="#" onclick="addSymptom('chest discomfort')">chest discomfort</a></li>
+			<li><a href="#" onclick="addSymptom('chest tightness')">chest tightness</a></li>
+			<li><a href="#" onclick="addSymptom('chill')">chill</a></li>
+			<li><a href="#" onclick="addSymptom('cicatrisation')">cicatrisation</a></li>
+			<li><a href="#" onclick="addSymptom('clonus')">clonus</a></li>
+			<li><a href="#" onclick="addSymptom('clumsiness')">clumsiness</a></li>
+			<li><a href="#" onclick="addSymptom('colic abdominal')">colic abdominal</a></li>
+			<li><a href="#" onclick="addSymptom('consciousness clear')">consciousness clear</a></li>
+			<li><a href="#" onclick="addSymptom('constipation')">constipation</a></li>
+			<li><a href="#" onclick="addSymptom('cough')">cough</a></li>
+			<li><a href="#" onclick="addSymptom('cushingoid facies')">cushingoid facies</a></li>
+			<li><a href="#" onclick="addSymptom('cushingoid habitus')">cushingoid habitus</a></li>
+			<li><a href="#" onclick="addSymptom('cyanosis')">cyanosis</a></li>
+			<li><a href="#" onclick="addSymptom('cystic lesion')">cystic lesion</a></li>
+			<li><a href="#" onclick="addSymptom('debilitation')">debilitation</a></li>
+			<li><a href="#" onclick="addSymptom('decompensation')">decompensation</a></li>
+			<li><a href="#" onclick="addSymptom('decreased body weight')">decreased body weight</a></li>
+			<li><a href="#" onclick="addSymptom('diarrhea')">diarrhea</a></li>
+			<li><a href="#" onclick="addSymptom('difficulty')">difficulty</a></li>
+			<li><a href="#" onclick="addSymptom('difficulty passing urine')">difficulty passing urine</a></li>
+			<li><a href="#" onclick="addSymptom('disequilibrium')">disequilibrium</a></li>
+			<li><a href="#" onclick="addSymptom('distended abdomen')">distended abdomen</a></li>
+			<li><a href="#" onclick="addSymptom('distress respiratory')">distress respiratory</a></li>
+			<li><a href="#" onclick="addSymptom('disturbed family')">disturbed family</a></li>
+			<li><a href="#" onclick="addSymptom('dizziness')">dizziness</a></li>
+			<li><a href="#" onclick="addSymptom('dizzy spells')">dizzy spells</a></li>
+			<li><a href="#" onclick="addSymptom('drool')">drool</a></li>
+			<li><a href="#" onclick="addSymptom('drowsiness')">drowsiness</a></li>
+			<li><a href="#" onclick="addSymptom('dysarthria')">dysarthria</a></li>
+			<li><a href="#" onclick="addSymptom('dysdiadochokinesia')">dysdiadochokinesia</a></li>
+			<li><a href="#" onclick="addSymptom('dysesthesia')">dysesthesia</a></li>
+			<li><a href="#" onclick="addSymptom('dyspnea')">dyspnea</a></li>
+			<li><a href="#" onclick="addSymptom('dyspnea on exertion')">dyspnea on exertion</a></li>
+			<li><a href="#" onclick="addSymptom('dysuria')">dysuria</a></li>
+			<li><a href="#" onclick="addSymptom('ecchymosis')">ecchymosis</a></li>
+			<li><a href="#" onclick="addSymptom('egophony')">egophony</a></li>
+			<li><a href="#" onclick="addSymptom('emphysematous change')">emphysematous change</a></li>
+			<li><a href="#" onclick="addSymptom('energy increased')">energy increased</a></li>
+			<li><a href="#" onclick="addSymptom('enuresis')">enuresis</a></li>
+			<li><a href="#" onclick="addSymptom('erythema')">erythema</a></li>
+			<li><a href="#" onclick="addSymptom('estrogen use')">estrogen use</a></li>
+			<li><a href="#" onclick="addSymptom('exhaustion')">exhaustion</a></li>
+			<li><a href="#" onclick="addSymptom('extrapyramidal sign')">extrapyramidal sign</a></li>
+			<li><a href="#" onclick="addSymptom('extreme exhaustion')">extreme exhaustion</a></li>
+			<li><a href="#" onclick="addSymptom('facial paresis')">facial paresis</a></li>
+			<li><a href="#" onclick="addSymptom('fall')">fall</a></li>
+			<li><a href="#" onclick="addSymptom('fatigability')">fatigability</a></li>
+			<li><a href="#" onclick="addSymptom('fatigue')">fatigue</a></li>
+			<li><a href="#" onclick="addSymptom('fear of falling')">fear of falling</a></li>
+			<li><a href="#" onclick="addSymptom('fecaluria')">fecaluria</a></li>
+			<li><a href="#" onclick="addSymptom('feces in rectum')">feces in rectum</a></li>
+			<li><a href="#" onclick="addSymptom('feeling hopeless')">feeling hopeless</a></li>
+			<li><a href="#" onclick="addSymptom('feeling strange')">feeling strange</a></li>
+			<li><a href="#" onclick="addSymptom('feeling suicidal')">feeling suicidal</a></li>
+			<li><a href="#" onclick="addSymptom('feels hot/feverish')">feels hot/feverish</a></li>
+			<li><a href="#" onclick="addSymptom('fever')">fever</a></li>
+			<li><a href="#" onclick="addSymptom('flare')">flare</a></li>
+			<li><a href="#" onclick="addSymptom('flatulence')">flatulence</a></li>
+			<li><a href="#" onclick="addSymptom('food intolerance')">food intolerance</a></li>
+			<li><a href="#" onclick="addSymptom('formication')">formication</a></li>
+			<li><a href="#" onclick="addSymptom('frail')">frail</a></li>
+			<li><a href="#" onclick="addSymptom('gasping for breath')">gasping for breath</a></li>
+			<li><a href="#" onclick="addSymptom('general discomfort')">general discomfort</a></li>
+			<li><a href="#" onclick="addSymptom('general unsteadiness')">general unsteadiness</a></li>
+			<li><a href="#" onclick="addSymptom('gravida 0')">gravida 0</a></li>
+			<li><a href="#" onclick="addSymptom('green sputum')">green sputum</a></li>
+			<li><a href="#" onclick="addSymptom('groggy')">groggy</a></li>
+			<li><a href="#" onclick="addSymptom('guaiac positive')">guaiac positive</a></li>
+			<li><a href="#" onclick="addSymptom('gurgle')">gurgle</a></li>
+			<li><a href="#" onclick="addSymptom('haemoptysis')">haemoptysis</a></li>
+			<li><a href="#" onclick="addSymptom('haemorrhage')">haemorrhage</a></li>
+			<li><a href="#" onclick="addSymptom('hallucinations auditory')">hallucinations auditory</a></li>
+			<li><a href="#" onclick="addSymptom('hallucinations visual')">hallucinations visual</a></li>
+			<li><a href="#" onclick="addSymptom('has religious belief')">has religious belief</a></li>
+			<li><a href="#" onclick="addSymptom('headache')">headache</a></li>
+			<li><a href="#" onclick="addSymptom('heartburn')">heartburn</a></li>
+			<li><a href="#" onclick="addSymptom('hematocrit decreased')">hematocrit decreased</a></li>
+			<li><a href="#" onclick="addSymptom('hematuria')">hematuria</a></li>
+			<li><a href="#" onclick="addSymptom('heme positive')">heme positive</a></li>
+			<li><a href="#" onclick="addSymptom('hemianopsia homonymous')">hemianopsia homonymous</a></li>
+			<li><a href="#" onclick="addSymptom('hemiplegia')">hemiplegia</a></li>
+			<li><a href="#" onclick="addSymptom('hemodynamically stable')">hemodynamically stable</a></li>
+			<li><a href="#" onclick="addSymptom('hepatosplenomegaly')">hepatosplenomegaly</a></li>
+			<li><a href="#" onclick="addSymptom('hirsutism')">hirsutism</a></li>
+			<li><a href="#" onclick="addSymptom('history of - blackout')">history of - blackout</a></li>
+			<li><a href="#" onclick="addSymptom('hoard')">hoard</a></li>
+			<li><a href="#" onclick="addSymptom('hoarseness')">hoarseness</a></li>
+			<li><a href="#" onclick="addSymptom('homelessness')">homelessness</a></li>
+			<li><a href="#" onclick="addSymptom('hot flush')">hot flush</a></li>
+			<li><a href="#" onclick="addSymptom('hydropneumothorax')">hydropneumothorax</a></li>
+			<li><a href="#" onclick="addSymptom('hypercapnia')">hypercapnia</a></li>
+			<li><a href="#" onclick="addSymptom('hyperemesis')">hyperemesis</a></li>
+			<li><a href="#" onclick="addSymptom('hyperhidrosis disorder')">hyperhidrosis disorder</a></li>
+			<li><a href="#" onclick="addSymptom('hyperkalemia')">hyperkalemia</a></li>
+			<li><a href="#" onclick="addSymptom('hypersomnia')">hypersomnia</a></li>
+			<li><a href="#" onclick="addSymptom('hypersomnolence')">hypersomnolence</a></li>
+			<li><a href="#" onclick="addSymptom('hypertonicity')">hypertonicity</a></li>
+			<li><a href="#" onclick="addSymptom('hypoalbuminemia')">hypoalbuminemia</a></li>
+			<li><a href="#" onclick="addSymptom('hypokinesia')">hypokinesia</a></li>
+			<li><a href="#" onclick="addSymptom('hypometabolism')">hypometabolism</a></li>
+			<li><a href="#" onclick="addSymptom('hyponatremia')">hyponatremia</a></li>
+			<li><a href="#" onclick="addSymptom('hypotension')">hypotension</a></li>
+			<li><a href="#" onclick="addSymptom('hypothermia, natural')">hypothermia, natural</a></li>
+			<li><a href="#" onclick="addSymptom('hypotonic')">hypotonic</a></li>
+			<li><a href="#" onclick="addSymptom('hypoxemia')">hypoxemia</a></li>
+			<li><a href="#" onclick="addSymptom('immobile')">immobile</a></li>
+			<li><a href="#" onclick="addSymptom('impaired cognition')">impaired cognition</a></li>
+			<li><a href="#" onclick="addSymptom('intermenstrual heavy bleeding')">intermenstrual heavy bleeding</a></li>
+			<li><a href="#" onclick="addSymptom('intoxication')">intoxication</a></li>
+			<li><a href="#" onclick="addSymptom('irritable mood')">irritable mood</a></li>
+			<li><a href="#" onclick="addSymptom('jugular venous distention')">jugular venous distention</a></li>
+			<li><a href="#" onclick="addSymptom('labored breathing')">labored breathing</a></li>
+			<li><a href="#" onclick="addSymptom('large-for-dates fetus')">large-for-dates fetus</a></li>
+			<li><a href="#" onclick="addSymptom('left atrial hypertrophy')">left atrial hypertrophy</a></li>
+			<li><a href="#" onclick="addSymptom('lesion')">lesion</a></li>
+			<li><a href="#" onclick="addSymptom('lethargy')">lethargy</a></li>
+			<li><a href="#" onclick="addSymptom('lightheadedness')">lightheadedness</a></li>
+			<li><a href="#" onclick="addSymptom('lip smacking')">lip smacking</a></li>
+			<li><a href="#" onclick="addSymptom('loose associations')">loose associations</a></li>
+			<li><a href="#" onclick="addSymptom('low back pain')">low back pain</a></li>
+			<li><a href="#" onclick="addSymptom('lung nodule')">lung nodule</a></li>
+			<li><a href="#" onclick="addSymptom('malaise')">malaise</a></li>
+			<li><a href="#" onclick="addSymptom('mass in breast')">mass in breast</a></li>
+			<li><a href="#" onclick="addSymptom('mass of body structure')">mass of body structure</a></li>
+			<li><a href="#" onclick="addSymptom('mediastinal shift')">mediastinal shift</a></li>
+			<li><a href="#" onclick="addSymptom('mental status changes')">mental status changes</a></li>
+			<li><a href="#" onclick="addSymptom('metastatic lesion')">metastatic lesion</a></li>
+			<li><a href="#" onclick="addSymptom('moan')">moan</a></li>
+			<li><a href="#" onclick="addSymptom('monoclonal')">monoclonal</a></li>
+			<li><a href="#" onclick="addSymptom('mood depressed')">mood depressed</a></li>
+			<li><a href="#" onclick="addSymptom('moody')">moody</a></li>
+			<li><a href="#" onclick="addSymptom('motor retardation')">motor retardation</a></li>
+			<li><a href="#" onclick="addSymptom('Murphy's sign')">Murphy's sign</a></li>
+			<li><a href="#" onclick="addSymptom('muscle hypotonia')">muscle hypotonia</a></li>
+			<li><a href="#" onclick="addSymptom('muscle twitch')">muscle twitch</a></li>
+			<li><a href="#" onclick="addSymptom('myalgia')">myalgia</a></li>
+			<li><a href="#" onclick="addSymptom('mydriasis')">mydriasis</a></li>
+			<li><a href="#" onclick="addSymptom('myoclonus')">myoclonus</a></li>
+			<li><a href="#" onclick="addSymptom('nasal flaring')">nasal flaring</a></li>
+			<li><a href="#" onclick="addSymptom('nausea')">nausea</a></li>
+			<li><a href="#" onclick="addSymptom('neck stiffness')">neck stiffness</a></li>
+			<li><a href="#" onclick="addSymptom('neologism')">neologism</a></li>
+			<li><a href="#" onclick="addSymptom('night sweat')">night sweat</a></li>
+			<li><a href="#" onclick="addSymptom('nightmare')">nightmare</a></li>
+			<li><a href="#" onclick="addSymptom('no status change')">no status change</a></li>
+			<li><a href="#" onclick="addSymptom('non-productive cough')">non-productive cough</a></li>
+			<li><a href="#" onclick="addSymptom('nonsmoker')">nonsmoker</a></li>
+			<li><a href="#" onclick="addSymptom('numbness')">numbness</a></li>
+			<li><a href="#" onclick="addSymptom('numbness of hand')">numbness of hand</a></li>
+			<li><a href="#" onclick="addSymptom('oliguria')">oliguria</a></li>
+			<li><a href="#" onclick="addSymptom('orthopnea')">orthopnea</a></li>
+			<li><a href="#" onclick="addSymptom('orthostasis')">orthostasis</a></li>
+			<li><a href="#" onclick="addSymptom('out of breath')">out of breath</a></li>
+			<li><a href="#" onclick="addSymptom('overweight')">overweight</a></li>
+			<li><a href="#" onclick="addSymptom('pain')">pain</a></li>
+			<li><a href="#" onclick="addSymptom('pain abdominal')">pain abdominal</a></li>
+			<li><a href="#" onclick="addSymptom('pain back')">pain back</a></li>
+			<li><a href="#" onclick="addSymptom('pain chest')">pain chest</a></li>
+			<li><a href="#" onclick="addSymptom('pain neck')">pain neck</a></li>
+			<li><a href="#" onclick="addSymptom('painful swallowing')">painful swallowing</a></li>
+			<li><a href="#" onclick="addSymptom('pallor')">pallor</a></li>
+			<li><a href="#" onclick="addSymptom('palpitation')">palpitation</a></li>
+			<li><a href="#" onclick="addSymptom('panic')">panic</a></li>
+			<li><a href="#" onclick="addSymptom('pansystolic murmur')">pansystolic murmur</a></li>
+			<li><a href="#" onclick="addSymptom('para 1')">para 1</a></li>
+			<li><a href="#" onclick="addSymptom('para 2')">para 2</a></li>
+			<li><a href="#" onclick="addSymptom('paralyse')">paralyse</a></li>
+			<li><a href="#" onclick="addSymptom('paraparesis')">paraparesis</a></li>
+			<li><a href="#" onclick="addSymptom('paresis')">paresis</a></li>
+			<li><a href="#" onclick="addSymptom('paresthesia')">paresthesia</a></li>
+			<li><a href="#" onclick="addSymptom('passed stones')">passed stones</a></li>
+			<li><a href="#" onclick="addSymptom('patient non compliance')">patient non compliance</a></li>
+			<li><a href="#" onclick="addSymptom('pericardial friction rub')">pericardial friction rub</a></li>
+			<li><a href="#" onclick="addSymptom('phonophobia')">phonophobia</a></li>
+			<li><a href="#" onclick="addSymptom('photophobia')">photophobia</a></li>
+			<li><a href="#" onclick="addSymptom('pin-point pupils')">pin-point pupils</a></li>
+			<li><a href="#" onclick="addSymptom('pleuritic pain')">pleuritic pain</a></li>
+			<li><a href="#" onclick="addSymptom('pneumatouria')">pneumatouria</a></li>
+			<li><a href="#" onclick="addSymptom('polydypsia')">polydypsia</a></li>
+			<li><a href="#" onclick="addSymptom('polymyalgia')">polymyalgia</a></li>
+			<li><a href="#" onclick="addSymptom('polyuria')">polyuria</a></li>
+			<li><a href="#" onclick="addSymptom('posturing')">posturing</a></li>
+			<li><a href="#" onclick="addSymptom('presence of q wave')">presence of q wave</a></li>
+			<li><a href="#" onclick="addSymptom('pressure chest')">pressure chest</a></li>
+			<li><a href="#" onclick="addSymptom('previous pregnancies 2')">previous pregnancies 2</a></li>
+			<li><a href="#" onclick="addSymptom('primigravida')">primigravida</a></li>
+			<li><a href="#" onclick="addSymptom('prodrome')">prodrome</a></li>
+			<li><a href="#" onclick="addSymptom('productive cough')">productive cough</a></li>
+			<li><a href="#" onclick="addSymptom('projectile vomiting')">projectile vomiting</a></li>
+			<li><a href="#" onclick="addSymptom('prostatism')">prostatism</a></li>
+			<li><a href="#" onclick="addSymptom('proteinemia')">proteinemia</a></li>
+			<li><a href="#" onclick="addSymptom('pruritus')">pruritus</a></li>
+			<li><a href="#" onclick="addSymptom('pulsus paradoxus')">pulsus paradoxus</a></li>
+			<li><a href="#" onclick="addSymptom('pustule')">pustule</a></li>
+			<li><a href="#" onclick="addSymptom('qt interval prolonged')">qt interval prolonged</a></li>
+			<li><a href="#" onclick="addSymptom('r wave feature')">r wave feature</a></li>
+			<li><a href="#" onclick="addSymptom('rale')">rale</a></li>
+			<li><a href="#" onclick="addSymptom('rambling speech')">rambling speech</a></li>
+			<li><a href="#" onclick="addSymptom('redness')">redness</a></li>
+			<li><a href="#" onclick="addSymptom('renal angle tenderness')">renal angle tenderness</a></li>
+			<li><a href="#" onclick="addSymptom('retropulsion')">retropulsion</a></li>
+			<li><a href="#" onclick="addSymptom('rhonchus')">rhonchus</a></li>
+			<li><a href="#" onclick="addSymptom('rolling of eyes')">rolling of eyes</a></li>
+			<li><a href="#" onclick="addSymptom('room spinning')">room spinning</a></li>
+			<li><a href="#" onclick="addSymptom('satiety early')">satiety early</a></li>
+			<li><a href="#" onclick="addSymptom('scar tissue')">scar tissue</a></li>
+			<li><a href="#" onclick="addSymptom('scleral icterus')">scleral icterus</a></li>
+			<li><a href="#" onclick="addSymptom('sedentary')">sedentary</a></li>
+			<li><a href="#" onclick="addSymptom('seizure')">seizure</a></li>
+			<li><a href="#" onclick="addSymptom('sensory discomfort')">sensory discomfort</a></li>
+			<li><a href="#" onclick="addSymptom('shooting pain')">shooting pain</a></li>
+			<li><a href="#" onclick="addSymptom('shortness of breath')">shortness of breath</a></li>
+			<li><a href="#" onclick="addSymptom('side pain')">side pain</a></li>
+			<li><a href="#" onclick="addSymptom('sinus rhythm')">sinus rhythm</a></li>
+			<li><a href="#" onclick="addSymptom('sleeplessness')">sleeplessness</a></li>
+			<li><a href="#" onclick="addSymptom('sleepy')">sleepy</a></li>
+			<li><a href="#" onclick="addSymptom('slowing of urinary stream')">slowing of urinary stream</a></li>
+			<li><a href="#" onclick="addSymptom('sneeze')">sneeze</a></li>
+			<li><a href="#" onclick="addSymptom('sniffle')">sniffle</a></li>
+			<li><a href="#" onclick="addSymptom('snore')">snore</a></li>
+			<li><a href="#" onclick="addSymptom('snuffle')">snuffle</a></li>
+			<li><a href="#" onclick="addSymptom('sore to touch')">sore to touch</a></li>
+			<li><a href="#" onclick="addSymptom('spasm')">spasm</a></li>
+			<li><a href="#" onclick="addSymptom('speech slurred')">speech slurred</a></li>
+			<li><a href="#" onclick="addSymptom('spontaneous rupture of membranes')">spontaneous rupture of membranes</a></li>
+			<li><a href="#" onclick="addSymptom('sputum purulent')">sputum purulent</a></li>
+			<li><a href="#" onclick="addSymptom('st segment depression')">st segment depression</a></li>
+			<li><a href="#" onclick="addSymptom('st segment elevation')">st segment elevation</a></li>
+			<li><a href="#" onclick="addSymptom('Stahli's line')">Stahli's line</a></li>
+			<li><a href="#" onclick="addSymptom('stiffness')">stiffness</a></li>
+			<li><a href="#" onclick="addSymptom('stool color yellow')">stool color yellow</a></li>
+			<li><a href="#" onclick="addSymptom('stridor')">stridor</a></li>
+			<li><a href="#" onclick="addSymptom('suicidal')">suicidal</a></li>
+			<li><a href="#" onclick="addSymptom('superimposition')">superimposition</a></li>
+			<li><a href="#" onclick="addSymptom('sweat')">sweat</a></li>
+			<li><a href="#" onclick="addSymptom('sweating increased')">sweating increased</a></li>
+			<li><a href="#" onclick="addSymptom('swelling')">swelling</a></li>
+			<li><a href="#" onclick="addSymptom('symptom aggravating factors')">symptom aggravating factors</a></li>
+			<li><a href="#" onclick="addSymptom('syncope')">syncope</a></li>
+			<li><a href="#" onclick="addSymptom('systolic ejection murmur')">systolic ejection murmur</a></li>
+			<li><a href="#" onclick="addSymptom('systolic murmur')">systolic murmur</a></li>
+			<li><a href="#" onclick="addSymptom('t wave inverted')">t wave inverted</a></li>
+			<li><a href="#" onclick="addSymptom('tachypnea')">tachypnea</a></li>
+			<li><a href="#" onclick="addSymptom('terrify')">terrify</a></li>
+			<li><a href="#" onclick="addSymptom('thicken')">thicken</a></li>
+			<li><a href="#" onclick="addSymptom('throat sore')">throat sore</a></li>
+			<li><a href="#" onclick="addSymptom('tinnitus')">tinnitus</a></li>
+			<li><a href="#" onclick="addSymptom('tired')">tired</a></li>
+			<li><a href="#" onclick="addSymptom('titubation')">titubation</a></li>
+			<li><a href="#" onclick="addSymptom('tonic seizures')">tonic seizures</a></li>
+			<li><a href="#" onclick="addSymptom('transaminitis')">transaminitis</a></li>
+			<li><a href="#" onclick="addSymptom('tremor')">tremor</a></li>
+			<li><a href="#" onclick="addSymptom('tremor resting')">tremor resting</a></li>
+			<li><a href="#" onclick="addSymptom('tumor cell invasion')">tumor cell invasion</a></li>
+			<li><a href="#" onclick="addSymptom('unable to concentrate')">unable to concentrate</a></li>
+			<li><a href="#" onclick="addSymptom('unconscious state')">unconscious state</a></li>
+			<li><a href="#" onclick="addSymptom('uncoordination')">uncoordination</a></li>
+			<li><a href="#" onclick="addSymptom('underweight')">underweight</a></li>
+			<li><a href="#" onclick="addSymptom('unhappy')">unhappy</a></li>
+			<li><a href="#" onclick="addSymptom('unresponsiveness')">unresponsiveness</a></li>
+			<li><a href="#" onclick="addSymptom('unsteady gait')">unsteady gait</a></li>
+			<li><a href="#" onclick="addSymptom('unwell')">unwell</a></li>
+			<li><a href="#" onclick="addSymptom('urge incontinence')">urge incontinence</a></li>
+			<li><a href="#" onclick="addSymptom('urgency of micturition')">urgency of micturition</a></li>
+			<li><a href="#" onclick="addSymptom('urinary hesitation')">urinary hesitation</a></li>
+			<li><a href="#" onclick="addSymptom('verbal auditory hallucinations')">verbal auditory hallucinations</a></li>
+			<li><a href="#" onclick="addSymptom('vertigo')">vertigo</a></li>
+			<li><a href="#" onclick="addSymptom('vision blurred')">vision blurred</a></li>
+			<li><a href="#" onclick="addSymptom('vomiting')">vomiting</a></li>
+			<li><a href="#" onclick="addSymptom('weepiness')">weepiness</a></li>
+			<li><a href="#" onclick="addSymptom('weight gain')">weight gain</a></li>
+			<li><a href="#" onclick="addSymptom('welt')">welt</a></li>
+			<li><a href="#" onclick="addSymptom('wheelchair bound')">wheelchair bound</a></li>
+			<li><a href="#" onclick="addSymptom('wheezing')">wheezing</a></li>
+			<li><a href="#" onclick="addSymptom('withdraw')">withdraw</a></li>
+			<li><a href="#" onclick="addSymptom('worry')">worry</a></li>
+			<li><a href="#" onclick="addSymptom('yellow sputum')">yellow sputum</a></li>
+		  </ul>
+		</div>
+	  </div>
+
+
+	<div class="bottombox">
+	  <ul id = "Selected">
+	  	<!-- <form id="myform" method="POST"> -->
+	  		<p>Number of Selected symptoms:  <input id="countsymptoms" name="countsymptoms" type="number" disabled placeholder="0" value="0"></p>
+	  		<p>Symptoms You have:-</p>
+	  		<div id="symptoms">
+	  			
+	  		</div>
+	  		<input type="button" id="predictres" name="predict" value="Predict" onclick="ajreq();">
+	  	<!-- </form> -->
+	  </ul>
+	</div>
+	<div id="predicted_result">
+		
+	</div>
+</div>
+</div>
+</body>
+</HTML>

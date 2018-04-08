@@ -3,7 +3,7 @@ import numpy as np
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.cross_validation import train_test_split
 
-data = pd.read_csv('Data/data_pivoted.csv')
+data = pd.read_csv('static/data_pivoted.csv')
 data = data.fillna(0)
 cols = data.columns.tolist()
 cols.remove('disease')
