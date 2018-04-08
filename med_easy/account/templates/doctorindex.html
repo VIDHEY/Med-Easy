@@ -1,13 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-  	<title>HOME</title>
+  	<title>Doctor Home</title>
 	<meta charset="UTF-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   	<link rel="stylesheet" type="text/css" href="css/index.css">
+
+<style type="text/css">
+	
+form.searchform input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+}
+
+form.searchform button {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+}
+
+form.searchform button:hover {
+    background: #0b7dda;
+}
+
+form.searchform:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+</style>
+
 
 </head>
 <body>
@@ -28,7 +64,14 @@
 		  </div>
 		</nav>
 	</div>
-	
+	<div class="searchform" style="z-index: 1;background:transparent;padding: 0px;width: 40;">
+		 <form name="searchform" style="margin:auto;max-width:300px" method="post">
+		 	<!-- <input type="text" placeholder="Search.." name="search2">
+  			 -->
+			  <input type="text" class="searchmobile" placeholder="Search Patient by Mobilenumber..." name="patientmobile" pattern="[1-9]{1}[0-9]{9}">
+			  <button type="submit"><i class="fa fa-search"></i></button>
+		</form>
+		</div>
 	<div class="row">
 		<div id="myCarousel" class="carousel slide" data-ride="carousel">
 		  <!-- Indicators -->
@@ -37,12 +80,7 @@
 		    <li data-target="#myCarousel" data-slide-to="1"></li>
 		    <li data-target="#myCarousel" data-slide-to="2"></li>
 		  </ol>
-		<div class="searchform">
-		 <form name="searchform">
-			  <input type="text" name="patientmobile" pattern="[1-9]{1}[0-9]{9}"><br>
-			  <input type="submit" name="search">
-		</form>
-		</div>
+		
 		  <!-- Wrapper for slides -->
 		  <div class="carousel-inner">
 		  	<div class="item active">

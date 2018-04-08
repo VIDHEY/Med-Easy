@@ -31,4 +31,5 @@ urlpatterns = [
     # path('ajax/signup/activate_user',views.activate_user, name='activate_user'),
     path('ajax/login_form/', views.login_form, name='login_form'),
     # path('ajax/login_submit', views.login_submit, name='login_submit')
+    path('doctor_search/', views.doctor_search, name='doctor_search'),
 ]+static(STATIC_URL,document_root=STATIC_ROOT)

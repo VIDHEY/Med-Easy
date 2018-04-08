@@ -122,3 +122,6 @@ def prediction(request):
 
 def prediction_form(request):
 	return render(request,'disease_prediction.html')
+
+def doctor_search(request):
+	return render(request,'search_hospital.html')
