@@ -36,6 +36,15 @@ class Medicine(models.Model):
 	medicines=models.CharField(max_length=100)
 
 class OtptStorage(models.Model):
-	date_of_issue=models.DateTimeField('last followed date')
+	time_of_issue=models.DateTimeField('time of issue')
 	phone_number=models.CharField(max_length=17)
 	otp=models.PositiveIntegerField(null=False, blank=False)
+
+class SessionDoctorAccount(models.Model):
+	time_of_issue=models.DateTimeField('time of issue')
+	user_id=models.ForeignKey(User, on_delete=models.CASCADE)
+	def is_session_alive(self):
+		now=timezone.now()
+		return now-datetime.timedelta(hours=1)<=self.pub_date<=now
+	is_session_alive.boolean=True
+	is_session_alive.short_description='Session alive?'
