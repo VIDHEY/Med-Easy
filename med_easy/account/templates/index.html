@@ -11,15 +11,15 @@
   	<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
   	<link rel="stylesheet" type="text/css" href="{% static 'css/modal.css' %}">
 <script type="text/javascript">
-	var phone=document.getElementById('i1').value;
-	var pwd=document.getElementById('i2').value;
 	function loginreq()
 	{
+		var phone=document.getElementById('i1').value;
+		var pwd=document.getElementById('i2').value;
 		$.ajax({
 			type:"POST",
 	        url: '/ajax/login_form/',
 	        data: {
-	          // 'sym_list': str,
+	          // 'sym_list': st,
 	          'phone_number':phone,
 	          'passwd':pwd
 	        },

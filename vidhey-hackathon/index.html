@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+{% load staticfiles %}
 <head>
   	<title>HOME</title>
 	<meta charset="UTF-8">
@@ -7,8 +8,8 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  	<link rel="stylesheet" type="text/css" href="css/index.css">
-  	<link rel="stylesheet" type="text/css" href="css/modal.css">
+  	<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+  	<link rel="stylesheet" type="text/css" href="{% static 'css/modal.css' %}">	
 
 <script type="text/javascript">
 	var phone=document.getElementById('i1').value;
@@ -45,7 +46,7 @@
 		    <ul class="nav navbar-nav navbar-right">
 
 		      <li><a href="#"><span class=""></span> Predict Disease</a></li>
-		      <li><a href="#"><span class=""></span> Search Hospitals</a></li>
+		      <li><a href="#"><span class="glyphicon glyphicon-search"></span> Search Hospitals</a></li>
 		      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
 		      <li><a onclick="document.getElementById('id01').style.display='block'">Login</a></li>
 		      
@@ -111,7 +112,7 @@ class="close" title="Close Modal">&times;</span>
       <label for="psw"><b>Password :-</b></label>
       <input id="i2" type="password" placeholder="Enter Password" name="psw" minlength="8" maxlength="16" required>
 
-      <button type="submit" class="login">Login</button>
+      <button type="button" class="login" onclick="loginreq();">Login</button>
       
     </div>
 

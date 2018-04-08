@@ -54,13 +54,19 @@ def home(request):
 def login_form(request):
 	if request.method=='POST':
 		ph_num=request.POST['phone_number']
-		user=User.objects.get(phone_number=ph_num)
-		if user.phone_number==request.POST['passwd']:
-			login(request,user)
-			return redirect('')
-		else:
+		try:
+			user=User.objects.get(phone_number=ph_num)
+			if user.passwd==request.POST['passwd']:
+				login(request,user)
+				return redirect('')
+			else:
+				data={
+				'error':'Wrong Password!!'
+				}
+				return JsonResponse(data)
+		except:
 			data={
-			'error':'Wrong Password!!'
+			'error': 'User Does not exists!'
 			}
 			return JsonResponse(data)
 	else:
