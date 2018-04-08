@@ -66,7 +66,13 @@ function initialize() {
 function callback(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
     for (var i = 0; i < results.length; i++) {
-      str="<li> Name: "+results[i].name+"<p> Address: "+results[i].vicinity+"</p>"+"<p> Rating: "+results[i].rating+"</p>"+"</li>";
+      str="<li> Name: "+results[i].name+"<p> Address: "+results[i].vicinity+"</p>";
+      if(results[i].rating == undefined){
+        str=str+"<p> Rating: "+ "Not Available" +"</p>"+"</li>";
+      }
+      else{
+        str=str+"<p> Rating: "+ results[i].rating +"</p>"+"</li>";
+      }
       id.innerHTML+=str;
     }
   }
