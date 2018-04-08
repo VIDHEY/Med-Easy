@@ -10,7 +10,28 @@
   	<link rel="stylesheet" type="text/css" href="css/index.css">
   	<link rel="stylesheet" type="text/css" href="css/modal.css">
 
-
+<script type="text/javascript">
+	var phone=document.getElementById('i1').value;
+	var pwd=document.getElementById('i2').value;
+	function loginreq()
+	{
+		$.ajax({
+			type:"POST",
+	        url: '/ajax/login_form/',
+	        data: {
+	          // 'sym_list': str,
+	          'phone_number':phone,
+	          'passwd':pwd
+	        },
+	        dataType: 'json',
+	        success: function (data) {
+	          if (data.error) {
+	            alert(data.error);
+	          }
+	        }
+	      });
+	}
+</script>
 </head>
 <body>
 <div class="container-fluid">
@@ -78,17 +99,17 @@
 class="close" title="Close Modal">&times;</span>
 
   <!-- Modal Content -->
-  <form class="modal-content animate" method="post">
+  <form class="modal-content animate" method="post" onsubmit="loginreq();">
     <div class="imgcontainer">
       <img src="user.png" alt="Avatar" class="avatar">
     </div>
 
     <div class="container">
       <label for="uname"><b>Mobile Number :-</b></label>
-      <input type="text" placeholder="Enter Mobilenumber" name="unum" pattern="[1-9]{1}[0-9]{9}" required>
+      <input id="i1" type="text" placeholder="Enter Mobilenumber" name="unum" pattern="[1-9]{1}[0-9]{9}" required>
       <br>
       <label for="psw"><b>Password :-</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" minlength="8" maxlength="16" required>
+      <input id="i2" type="password" placeholder="Enter Password" name="psw" minlength="8" maxlength="16" required>
 
       <button type="submit" class="login">Login</button>
       
