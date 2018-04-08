@@ -44,7 +44,7 @@
     	c.classList.add('active');
     	var p=c.getAttribute('name');
     	//console.log(c.getAttribute('name'));
-    	document.getElementsByClassName(p)[0].style.display="block";
+    	document.getElementsByClassName(p)[0].style.display="flex";
     	}
   </script>
 
@@ -57,7 +57,7 @@
 		<nav class="navbar navbar-default">
 		  <div class="container-fluid navcon">
 		    <div class="navbar-header">
-		      <a class="navbar-brand" href="#">MedEasy</a>
+		      <a class="navbar-brand" style="color: green;font-weight: bold;font-size: 30px;" href="#">MedEasy</a>
 		    </div>
 		   
 		    <ul class="nav navbar-nav navbar-right">
@@ -75,64 +75,78 @@
 
 
 	<div class="row" style="display: flex;flex-wrap: wrap;padding-top: 30px;">
-	<div class="col-md-4">
-		<div class="userphoto"><img src="vidhey.png" height="130px" width="160px" class="img-thumbnail"></div>
-	</div>
-	
-	<div class="col-md-6">
-		<div class="userpersonalinfo" style="margin-left: 10%;">
-			<div class="fieldname"><div classname="field">NAME:-&nbsp;&nbsp;<span class="data">xyz</span></div>
-			<div class="fieldname">DOB:-&nbsp;&nbsp;<span class="data">aa/bb/cccc</span></div>
-			<div class="fieldname">WEIGHT:-&nbsp;&nbsp;<span class="data">50</span></div>
-			<div class="fieldname">AGE:-&nbsp;&nbsp;<span class="data">34</span></div>
-			<div class="fieldname">BLOOD GROUP:-&nbsp;&nbsp;<span class="data">A+</span></div>
-			<div class="fieldname">CONTACT:-&nbsp;&nbsp;<span class="data">98900008990</span></div>
-			<div class="fieldname">AADHAR NUMBER:-&nbsp;&nbsp;<span class="data"></span></div>
-			<div class="fieldname">ADDRESS:-&nbsp;&nbsp;<span class="data"></span></div>
+		<div class="col-md-4">
+			<div class="userphoto"><img src="vidhey.png" height="130px" width="160px" class="img-thumbnail"></div>
+		</div>
+		
+		<div class="col-md-6">
+			<div class="userpersonalinfo" style="margin-left: 10%;">
+				<div class="fieldname"><div classname="field">NAME:-&nbsp;&nbsp;<span class="data">Joshi Sachin</span></div>
+				<div class="fieldname">DOB:-&nbsp;&nbsp;<span class="data">12/03/1990</span></div>
+				<div class="fieldname">WEIGHT:-&nbsp;&nbsp;<span class="data">67kg</span></div>
+				<div class="fieldname">AGE:-&nbsp;&nbsp;<span class="data">28 years</span></div>
+				<div class="fieldname">BLOOD GROUP:-&nbsp;&nbsp;<span class="data">A+</span></div>
+				<div class="fieldname">CONTACT:-&nbsp;&nbsp;<span class="data">98900008990</span></div>
+				<div class="fieldname">ADDRESS:-&nbsp;&nbsp;<span class="data">A-323,Bhabha Bhavan,SVNIT CAMPUS,Surat.</span></div>
 
+			</div>
+		</div>
+		<div class="col-md-2"></div>
+		</div>
+
+		<div class="row" style="margin-top: 30px; width: 100%;">
+			<div class="linkbuttons col-md-12">
+				<ul class="nav nav-tabs changetabs" style="width: 100%;">
+	  				<li id="link1" class="active" name="history"><a href="#" onclick="change(this)">History</a></li>
+	  				<li id="link2" name="quotes"><a href="#" onclick="change(this)">Quotes</a></li>
+	  				<li id="link3" name="allergies"><a href="#" onclick="change(this)">Allergies</a></li>
+	  			</ul>
+			</div>
+		</div>
+
+	<div class="row toggcontent">
+	<div class="history a1" style="display: flex; width: 100%;">
+		<div id="h1" class="historylist">
+			<ul class="historydetail" style="list-style-type: none;margin: 0px;padding-left: 5px;">
+				<li class="symptom"><span class="hfieldnm">Symptoms : &nbsp;cold</span></li>
+				<li class="date"><span class="hfieldnm">Date : &nbsp;02/03/2018</span></li>
+				<li class="hospital"><span class="hfieldnm">Hospital : Tata Hospital</span></li>
+				<li class="description"><span class="hfieldnm">Description : Fever due to season change</span></li>
+				<li class="medicines"><span class="hfieldnm">Medicines : paracitamol</span></li>
+				<li class="weight"><span class="hfieldnm">weight :&nbsp; 70kg</span></li>
+				<li class="height"><span class="hfieldnm">height :&nbsp; 170cm</span></li>
+			</ul>
+		</div>
+		<div id="h2" class="historylist">
+			<ul class="historydetail" style="list-style-type: none;margin: 0px;padding-left: 5px;">
+				<li class="symptom"><span class="hfieldnm">Symptoms : &nbsp;vomiting</span></li>
+				<li class="date"><span class="hfieldnm">Date : &nbsp;20/03/2018</span></li>
+				<li class="hospital"><span class="hfieldnm">Hospital : Zydus Hospital</span></li>
+				<li class="description"><span class="hfieldnm">Description : Food poisioning due to unhealthy food</span></li>
+				<li class="medicines"><span class="hfieldnm">Medicines : avomin</span></li>
+				<li class="weight"><span class="hfieldnm">weight :&nbsp; 67kg</span></li>
+				<li class="height"><span class="hfieldnm">height :&nbsp; 170cm</span></li>
+			</ul>
 		</div>
 	</div>
-	<div class="col-md-2"></div>
-</div>
-	<div class="row" style="margin-top: 30px;">
-		<div class="linkbuttons col-md-12">
-			<ul class="nav nav-tabs changetabs">
-  				<li id="link1" class="active" name="history"><a href="#" onclick="change(this)">History</a></li>
-  				<li id="link2" name="quotes"><a href="#" onclick="change(this)">Quotes</a></li>
-  				<li id="link3" name="allergies"><a href="#" onclick="change(this)">Allergies</a></li>
-  			</ul>
+
+	<div class="allergies a3" style="display: none;width: 100%;">
+		<div id="allnm">
+			<h3 class="title">FOOD ALLERGY</h3>
+			<hr>
+			<h4 class="description">The signs and symptoms may range from mild to severe.They may include itchiness, swelling of the tongue, vomiting, diarrhea, hives, trouble breathing, or low blood pressure.</h4>
 		</div>
-	</div>	
-
-<div class="history a1" style="display: block;">
-	<div id="h1" class="historylist">
-		<ul class="historydetail" style="list-style-type: none;">
-			<li class="symptom"><span class="hfieldnm">Symptoms : </span></li>
-			<li class="date"><span class="hfieldnm">Date : </span></li>
-			<li class="hospital"><span class="hfieldnm">Hospital : </span></li>
-			<li class="description"><span class="hfieldnm">Description : </span></li>
-			<li class="medicines"><span class="hfieldnm">Medicines : </span></li>
-			<li class="weight"><span class="hfieldnm">weight : </span></li>
-			<li class="height"><span class="hfieldnm">height : </span></li>
-		</ul>
 	</div>
-</div>
 
-<div class="allergies a3" style="display: none;">
-	<div id="allnm">
-		<h1 class="title"></h1>
-		<h5 class="description"></h5>
+	<div class="quotes a2" style="display: none;width: 100%;margin-left: 2%;">
+		<blockquote class="blockquote">
+	    	<p>"He had a severe fracture in his right hand and a bone is replaced by steel rode."</p>
+	    	<footer>Dr.Ketan Patel</footer>
+	 	</blockquote>
 	</div>
-</div>
+	</div>
 
-<div class="quotes a2" style="display: none;">
-	<blockquote class="blockquote">
-    	<p>For 50 years, WWF has been protecting the future of nature. The world's leading conservation organization, WWF works in 100 countries and is supported by 1.2 million members in the United States and close to 5 million globally.</p>
-    	<footer>From WWF's website</footer>
- 	</blockquote>
-</div>
-
-</div>
+	</div>
 </div>
 </div>
 </body>

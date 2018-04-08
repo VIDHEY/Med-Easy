@@ -6,7 +6,7 @@
 		background-color: #c9edd8;
 	}
 .container{
-	z-index:1;
+
 	background-color: white;
 	height: 100vh;
 	border: 1px solid black;
@@ -30,3 +30,30 @@
 .links{
 	font-size: 20px;
 }
+.toggcontent{
+margin-top: 20px;
+
+}
+.historylist{
+	border: 1px solid black;
+	margin: auto 30px;
+	width: 100%;
+	clear: right;
+	padding:20px;
+	overflow: auto;
+	box-shadow: 2px 4px 3px grey;
+}
+.changetabs li{
+	font-size: 20px;
+}
+
+#allnm{
+	margin-left: 25px;
+	border: 1px solid black;
+	margin: auto 30px;
+	width: 80%;
+	clear: right;
+	padding:20px;
+	box-shadow: 2px 4px 3px grey;
+}
+
