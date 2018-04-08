@@ -12,28 +12,41 @@
 	
 </head>
 
-	<!-- <script>
-    $("#link1").click(function () {
-      // var username = $(this).val();
+	<script>
+    // $("#link1").click(function () {
+    //   // var username = $(this).val();
 
-      $.ajax({
-         url: '/ajax/validate_username/',
-         data: {
-           'username': 
-         },
-         dataType: 'json',
-        success: function (data) {
-           if (true) {
-            // alert("A user with this username already exists.");
-            document.getElementById("detail").innerHTML="<h1>hi</h1>";
-          // }
-        }
-      });
+    //   $.ajax({
+    //      url: '/ajax/validate_username/',
+    //      data: {
+    //        'username': 
+    //      },
+    //      dataType: 'json',
+    //     success: function (data) {
+    //        if (true) {
+    //         // alert("A user with this username already exists.");
+    //         document.getElementById("detail").innerHTML="<h1>hi</h1>";
+    //       // }
+    //     }
+    //   });
 
-    });
+    // });
+    function change(e)
+    {
+    	$("#link1").removeClass("active");
+    	$("#link2").removeClass("active");
+    	$("#link3").removeClass("active");
+    	$(".history").css("display","none");
+    	$(".allergies").css("display","none");
+    	$(".quotes").css("display","none");
+    	console.log(e.parentNode);
+    	var c=e.parentNode;
+    	c.classList.add('active');
+    	var p=c.getAttribute('name');
+    	//console.log(c.getAttribute('name'));
+    	document.getElementsByClassName(p)[0].style.display="block";
+    	}
   </script>
- -->
-
 
 
 <body>
@@ -83,15 +96,15 @@
 </div>
 	<div class="row" style="margin-top: 30px;">
 		<div class="linkbuttons col-md-12">
-			<ul class="nav nav-tabs">
-  				<li id="link1" class="active"><a href="#">History</a></li>
-  				<li id="link2"><a href="#">Quotes</a></li>
-  				<li id="link3"><a href="#">Allergies</a></li>
+			<ul class="nav nav-tabs changetabs">
+  				<li id="link1" class="active" name="history"><a href="#" onclick="change(this)">History</a></li>
+  				<li id="link2" name="quotes"><a href="#" onclick="change(this)">Quotes</a></li>
+  				<li id="link3" name="allergies"><a href="#" onclick="change(this)">Allergies</a></li>
   			</ul>
 		</div>
 	</div>	
 
-<div class="history">
+<div class="history a1" style="display: block;">
 	<div id="h1" class="historylist">
 		<ul class="historydetail" style="list-style-type: none;">
 			<li class="symptom"><span class="hfieldnm">Symptoms : </span></li>
@@ -105,14 +118,14 @@
 	</div>
 </div>
 
-<div class="allergies">
+<div class="allergies a3" style="display: none;">
 	<div id="allnm">
 		<h1 class="title"></h1>
 		<h5 class="description"></h5>
 	</div>
 </div>
 
-<div class="quotes">
+<div class="quotes a2" style="display: none;">
 	<blockquote class="blockquote">
     	<p>For 50 years, WWF has been protecting the future of nature. The world's leading conservation organization, WWF works in 100 countries and is supported by 1.2 million members in the United States and close to 5 million globally.</p>
     	<footer>From WWF's website</footer>
