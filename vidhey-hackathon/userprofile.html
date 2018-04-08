@@ -11,6 +11,31 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	
 </head>
+
+	<!-- <script>
+    $("#link1").click(function () {
+      // var username = $(this).val();
+
+      $.ajax({
+         url: '/ajax/validate_username/',
+         data: {
+           'username': 
+         },
+         dataType: 'json',
+        success: function (data) {
+           if (true) {
+            // alert("A user with this username already exists.");
+            document.getElementById("detail").innerHTML="<h1>hi</h1>";
+          // }
+        }
+      });
+
+    });
+  </script>
+ -->
+
+
+
 <body>
 <div class="container-fluid">
 <div class="container">
@@ -59,14 +84,12 @@
 	<div class="row" style="margin-top: 30px;">
 		<div class="linkbuttons col-md-12">
 			<ul class="nav nav-tabs">
-  				<li class="active links"><a href="#">History</a></li>
-  				<li><a href="#" class="links">Quotes</a></li>
-  				<li><a href="#" class="links">Allergies</a></li>
+  				<li id="link1" class="active"><a href="#">History</a></li>
+  				<li id="link2"><a href="#">Quotes</a></li>
+  				<li id="link3"><a href="#">Allergies</a></li>
   			</ul>
 		</div>
-	</div>
-	<div>
-	
+	</div>	
 
 <div class="history">
 	<div id="h1" class="historylist">
