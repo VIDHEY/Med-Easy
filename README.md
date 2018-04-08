@@ -9,3 +9,11 @@ Team members:
               2. Harnish Rajput
               
               3. Vidhey Joshipura
+
+# Project Description
+
+## Main Modules:
+		
+		1. Symptom Based Disease Prediction
+		2. Search for Nearby Hospitals
+		3. A record System for all the patients history
