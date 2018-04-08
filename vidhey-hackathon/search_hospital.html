@@ -25,25 +25,36 @@ html, body {
 	font-size: 20px;
 	padding: 0px 8px;
 }
-.searchinputs{
-	margin:3% 16%;
-
-}
 #nearbysearch{
-	height: 30px;
-
+	float: right;
+	background-color: #63d37d;
+	color: black;
+	font-size: 20px;
+	padding:10px 10px;
+}
+#farsearch{
+	background-color: white;
+	border: 1px solid black;
+	font-size: 22px;
+	opacity: 0.7;
+	margin: 0px;
+}
+#farsearch:hover{
+	opacity: 1.0;
+	font-weight: bold;
+	font-size: 21px;	
 }
 .hospitalname{
 	font-weight: bold;
-	font-size: 18px;
+	font-size: 20px;
 	font-family: arial;
 }
 .address{
-	font-size: 15px;
+	font-size: 18px;
 	color: grey;
 }
 .ratings{
-	font-size: 16px;
+	font-size: 17px;
 	color: red;
 }
 li{
@@ -51,22 +62,45 @@ li{
 }
 .ho
 {
-	width: 50%;
+	width: 60%;
 	background-color: white;
 	border: 1px solid black;
 	box-shadow: 2px 2px 3px grey;
+	border-radius: 4px;
+	margin: 10px 10px;
+	padding: 20px;
 }
 </style>
  </head>
  <body>
  	<div class="container-fluid">
- 	<div class="searchinputs">
- 		<input type="text" class="addloc" id="locationnm" placeholder="Search location...">
- 		<button id="nearbysearch" onclick="codeAddress();">Search Hospitals</button>
-    <button onclick="getLocation();">Nearby hospitals</button></div>
- 	<div id ="map-canvas"></div>
-  	<ul id = "hospitals"></ul>
-  	</div>
+	 	<div class="row">
+			<nav class="navbar navbar-default">
+			  <div class="container-fluid">
+			    <div class="navbar-header">
+			      <a class="navbar-brand" href="#">MedEasy</a>
+			    </div>
+			   
+			    <ul class="nav navbar-nav navbar-right">
+
+			      <li><a href="#"><span class=""></span> Predict Disease</a></li>
+			      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+			      <li><a onclick="document.getElementById('id01').style.display='block'">Login</a></li>
+			      
+			    </ul>
+			  </div>
+			</nav>
+		</div>
+
+
+
+	 	<div class="searchinputs">
+	 		<input type="text" class="addloc" id="locationnm" placeholder="Search location..." >
+	 		<button id="farsearch" onclick="codeAddress();"><i class="glyphicon glyphicon-search"></i></button>
+		    <button id="nearbysearch" onclick="getLocation();">Nearby Hospitals</button></div>
+		 	<div id ="map-canvas"></div>
+		  	<ul id = "hospitals"></ul>
+  		</div>
 
   	<!-- <li class="ho">
   		<br>
@@ -85,14 +119,16 @@ li{
   <script type="text/javascript">
   
     var map,id;
-  var infowindow;
-  var lat,lng;
-function getLocation() {
-    if(navigator.geolocation){
-navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
-        } else {
+ 	var infowindow;
+  	var lat,lng;
+	
+	function getLocation() {
+    	if(navigator.geolocation){
+			navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
+        	} 
+    	else {
             alert("Geolocation is not supported by this browser.");
-        }
+        	}
     }
 // function getLocation1(location){
 //     var geocoder = new google.maps.Geocoder();
@@ -177,7 +213,7 @@ function callback(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
     id.innerHTML='';
     for (var i = 0; i < results.length; i++) {
-    	str="<li class=\"ho\"><br><span class=\"hospitalname\">"+results[i].name+"</span><br><hr><span class=\"address\">"+results[i].vicinity+"</span><br>";
+    	str="<li class=\"ho\"><br><span class=\"hospitalname\">"+results[i].name+"</span><br><hr><span class=\"address\">"+results[i].vicinity+"</span><br><br>";
 
       // str="<li> Name: "+results[i].name+"<p> Address: "+results[i].vicinity+"</p>";
       if(results[i].rating == undefined){
@@ -185,7 +221,7 @@ function callback(results, status) {
         // str=str+"<p> Rating: "+ "Not Available" +"</p>"+"</li>";
       }
       else{
-      	str+="<span class=\"ratings\">"+results[i].rating +"/5"+"</span> <br>";
+      	str+="<span class=\"ratings\">"+"Ratings-"+results[i].rating +"/5"+"</span> <br>";
         // str=str+"<p> Rating: "+ results[i].rating +"</p>"+"</li>";
       }
       id.innerHTML+=str;
